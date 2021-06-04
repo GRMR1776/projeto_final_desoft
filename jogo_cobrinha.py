@@ -3,7 +3,7 @@ from pygame.event import Event
 from pygame.locals import *
 from sys import exit
 from random import randint
-from variaveis_cobrinha import *
+
 
 
 pygame.init()
@@ -25,6 +25,8 @@ def texto(window, msg, cor, tam, x, y):
 
 #reinicia o jogo
 def reiniciar():
+    Largura = 1000
+    altura = 500
     global pontos, comprimento, x, y, lista_cobra, lista_cabeca, x1, y1, morreu
     pontos = 0
     comprimento = 25
@@ -32,18 +34,54 @@ def reiniciar():
     y = int(altura/2)
     lista_cobra=[]
     lista_cabeca=[]
-    x1 = randint(10, 800)
-    y1 = randint(10, 400)
+    x1 = randint(10, Largura-10)
+    y1 = randint(10, altura-10)
     morreu = False
 
 
 def cria_corpo(lista_cobra):
+    Largura = 1000
+    altura = 500
+    tela = pygame.display.set_mode ((Largura, altura))
+    
     for XeY in lista_cobra:
         #Xey = [x, y]
         pygame.draw.rect(tela, (255, 0, 0), (XeY[0], XeY[1], 20,20))
 
+    
+
 
 def cobrinha1(tela, relogio):
+
+    Largura = 1000
+    altura = 500
+    branco = (255, 255, 255)
+    vermelho = (255, 0, 0)
+    verde  = (0, 255, 0)
+    azul = (0, 0, 255)
+    PRETO = (0, 0, 0)
+
+    x=Largura/2
+    y=altura/2
+
+
+
+
+    #funcao cria corpo
+    lista_cobra = []
+    comprimento = 10
+
+
+    #relogio
+    relogio = pygame.time.Clock()
+        
+
+
+        #tela do jogo
+    tela = pygame.display.set_mode ((Largura, altura))
+
+    '''#comprimento
+    compri = comprimento'''
     
     #relogio
     relogio = pygame.time.Clock()
@@ -51,10 +89,19 @@ def cobrinha1(tela, relogio):
 
         #pontos do jogo 
     pontos = 0
-
+    
 
     #morte da cobra
     morreu = False
+
+    #controle cobra
+    velocidade = 2
+    x2 = 2
+    y2 =  0
+
+     #posicao maca
+    x1 = randint(50, 250)
+    y1 = randint(50, 250)
 
     #loop
 
@@ -64,7 +111,7 @@ def cobrinha1(tela, relogio):
             if event.type == QUIT:
                 game = False
 
-
+        
         #movimento controlado do objeto
             if event.type == KEYDOWN:
                 if event.key == K_a:
@@ -92,7 +139,10 @@ def cobrinha1(tela, relogio):
                         y2 = velocidade
                         x2 = 0 
    
-   
+        '''#posicao cobra
+        x = int(Largura/2)
+        y = int(altura/2)'''
+
         #controle
         x = x +x2
         y = y + y2
@@ -102,16 +152,11 @@ def cobrinha1(tela, relogio):
         tela.fill(PRETO)
 
 
-        #texto
-        texto(tela, f"pontos: {pontos}", branco, 20, 10, altura - 20)
-    
-
-
                     
         #objetos
         cobra =pygame.draw.rect(tela, (255, 0, 0), (x, y, 20, 20))
         Maça=pygame.draw.rect(tela, (0, 0, 255), (x1, y1, 20, 20))
-
+        
 
         #colisao 
         if cobra.colliderect(Maça):
@@ -132,8 +177,8 @@ def cobrinha1(tela, relogio):
         if lista_cobra.count(lista_cabeca) > 1:
             morreu = True
             if morreu == True:
-                texto(tela, "GAME OVER", branco, 50, (Largura/2)-100,  altura/2)
-                texto(tela, "aperte R para reiniciar", branco, 50, (Largura/2)-180,  (altura/2)+100)
+                '''texto(tela, "GAME OVER", branco, 50, (Largura/2)-100,  altura/2)
+                texto(tela, "aperte R para reiniciar", branco, 50, (Largura/2)-180,  (altura/2)+100)'''
 
                 pygame.display.update()
             while morreu:
@@ -146,8 +191,8 @@ def cobrinha1(tela, relogio):
     
         #reiniciando depois de morto
                     if event.type == KEYDOWN:
-                            if event.key == K_r:
-                                reiniciar()
+                        if event.key == K_r:
+                            reiniciar()
                     
                     
 
@@ -162,6 +207,8 @@ def cobrinha1(tela, relogio):
         if len(lista_cobra) > comprimento:
             del lista_cobra[0]
         cria_corpo(lista_cobra)
+
+        pygame.draw.rect(tela, (0, 0, 255), (x1, y1, 20, 20))
 
 
         relogio.tick(100)
