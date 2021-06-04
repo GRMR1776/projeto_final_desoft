@@ -1,12 +1,15 @@
 import pygame
 from jogo_cobrinha import *
-from variaveis_cobrinha import *
+
 
 
 #menu do jogo
 #variaveis da tela
 Largura = 1000
 altura = 500
+
+#relogio
+relogio = pygame.time.Clock()
 
 #tela do jogo
 tela = pygame.display.set_mode ((Largura, altura))
@@ -24,7 +27,7 @@ while game:
         if event.type == pygame.QUIT:
             game = False
         if event.type == pygame.KEYDOWN:
-            cobrinha1()
+            cobrinha1(tela, relogio)
         if distancia_ao_centro < 20 and event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             cobrinha1(tela, relogio)
     tela.fill((0, 0, 0))
