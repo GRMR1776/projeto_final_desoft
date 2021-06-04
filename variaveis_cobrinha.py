@@ -10,22 +10,9 @@ azul = (0, 0, 255)
 PRETO = (0, 0, 0)
 
 
-    #posicao cobra
-x = int(Largura/2)
-y = int(altura/2)
 
 
-    #posicao maca
-x1 = randint(10, 800)
-y1 = randint(10, 400)
-
-
-    #controle cobra
-velocidade = 2
-x2 = velocidade 
-y2 =  0
-
-    #funcao cria corpo
+#funcao cria corpo
 lista_cobra = []
 comprimento = 10
 
