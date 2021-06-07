@@ -8,3 +8,4 @@ cx_Freeze.setup(
                            'include_files':['imagens', 'sons']}},
 
     executables = executables
+)    

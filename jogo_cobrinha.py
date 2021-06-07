@@ -3,19 +3,22 @@ from pygame.event import Event
 from pygame.locals import *
 from sys import exit
 from random import randint
+import os
 
 
 
 pygame.init()
-'''pygame.mixer.init()
 
-#musica de fundo
+
+diretorio_principal = os.path.dirname(__file__)
+diretorio_sons = os.path.join(diretorio_principal, 'sons')
+
+'''#musica de fundo
 pygame.mixer.music.load('C:/Users/rodol/Downloads/jogo_so_meu/jogo-principal/jogos/musica/pacman.fundo.mp3')
 pygame.mixer.music.play(-1)
-pygame.mixer.music.set_volume(0.01)
+pygame.mixer.music.set_volume(0.01)'''
 
-#musica de colisao
-barulho = pygame.mixer.Sound('C:/Users/rodol/Downloads/jogo_so_meu/jogo-principal/jogos/musica/coin.mario.mp3'''
+
 
 #texto
 def texto(window, msg, cor, tam, x, y):
@@ -52,6 +55,10 @@ def cria_corpo(lista_cobra):
 
 
 def cobrinha1(tela, relogio):
+    pygame.mixer.init()
+
+    #musica de colisao
+    barulho = pygame.mixer.Sound(os.path.join(diretorio_sons, 'jump_sound.wav'))
 
     Largura = 1000
     altura = 500
@@ -165,7 +172,7 @@ def cobrinha1(tela, relogio):
             x1 = randint(10, 800)
             y1 = randint(10, 400)
             pontos = pontos + 1
-            #barulho.play()
+            barulho.play()
             comprimento = comprimento +10
 
         #corpocobra
