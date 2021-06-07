@@ -179,8 +179,16 @@ def cobrinha1(tela, relogio):
         if lista_cobra.count(lista_cabeca) > 1:
             morreu = True
             if morreu == True:
-                '''texto(tela, "GAME OVER", branco, 50, (Largura/2)-100,  altura/2)
-                texto(tela, "aperte R para reiniciar", branco, 50, (Largura/2)-180,  (altura/2)+100)'''
+                txt2=f'Game Over'                                                               
+                fonte2=pygame.font.get_default_font()              
+                fontesys2=pygame.font.SysFont(fonte2, 30)           
+                txttela2 = fontesys2.render(txt2, 1, (255,255,255))
+                tela.blit(txttela2,(450, 200))
+                txt2=f'Aperte R para reiniciar'                                                               
+                fonte2=pygame.font.get_default_font()              
+                fontesys2=pygame.font.SysFont(fonte2, 30)           
+                txttela2 = fontesys2.render(txt2, 1, (255,255,255))
+                tela.blit(txttela2,(410, 350))
 
                 pygame.display.update()
             while morreu:
