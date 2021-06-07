@@ -167,3 +167,82 @@ class DinoVoador(pygame.sprite.Sprite):
                 self.index_lista = 0
             self.index_lista += 0.25
             self.image = self.imagens_dinossauro[int(self.index_lista)]
+
+todas_as_sprites = pygame.sprite.Group()
+dino = Dino()
+todas_as_sprites.add(dino)
+
+for i in range(4):
+    nuvem = Nuvens()
+    todas_as_sprites.add(nuvem)
+
+for i in range(LARGURA*2//64):
+    chao = Chao(i)
+    todas_as_sprites.add(chao)
+
+cacto = Cacto()
+todas_as_sprites.add(cacto)
+
+dino_voador = DinoVoador()
+todas_as_sprites.add(dino_voador)
+
+grupo_obstaculos = pygame.sprite.Group()
+grupo_obstaculos.add(cacto)
+grupo_obstaculos.add(dino_voador)
+
+relogio = pygame.time.Clock()
+while True:
+    relogio.tick(30)
+    tela.fill(AZUL)
+    for event in pygame.event.get():
+        if event.type == QUIT:
+            pygame.quit()
+            exit()
+        if event.type == KEYDOWN:
+            if event.key == K_SPACE and colidiu == False:
+                if dino.rect.y != dino.pos_y_inicial:
+                    pass
+                else:
+                    dino.pular()
+
+            if event.key == K_r and colidiu == True:
+                reiniciar_jogo()
+
+    colisoes = pygame.sprite.spritecollide(dino, grupo_obstaculos, False, pygame.sprite.collide_mask)
+
+    todas_as_sprites.draw(tela)
+
+    if cacto.rect.topright[0] <= 0 or dino_voador.rect.topright[0] <= 0:
+        escolha_obstaculo = choice([0, 1])
+        cacto.rect.x = LARGURA
+        dino_voador.rect.x = LARGURA
+        cacto.escolha = escolha_obstaculo
+        dino_voador.escolha = escolha_obstaculo
+
+    if colisoes and colidiu == False:
+        som_colisao.play()
+        colidiu = True
+
+    if colidiu == True:
+        if pontos % 100 == 0:
+            pontos += 1
+        game_over = exibe_mensagem('GAME OVER', 40, (0,0,0))
+        tela.blit(game_over, (LARGURA//2, ALTURA//2))
+        restart = exibe_mensagem('Pressione r para reiniciar', 20, (0,0,0))
+        tela.blit(restart, (LARGURA//2, (ALTURA//2) + 60))
+
+    else:
+        pontos += 1
+        todas_as_sprites.update()
+        texto_pontos = exibe_mensagem(pontos, 40, (0,0,0))
+
+    if pontos % 100 == 0:
+        som_pontuacao.play()
+        if velocidade_jogo >= 23:
+            velocidade_jogo += 0
+        else:
+            velocidade_jogo += 1
+        
+    tela.blit(texto_pontos, (520, 30))
+
+    pygame.display.flip()
