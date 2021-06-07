@@ -69,7 +69,7 @@ def cobrinha1(tela, relogio):
 
     #funcao cria corpo
     lista_cobra = []
-    comprimento = 10
+    comprimento = 100
 
 
     #relogio
@@ -148,10 +148,12 @@ def cobrinha1(tela, relogio):
         y = y + y2
 
 
-        #atualiza tela
-        tela.fill(PRETO)
+        '''#atualiza tela
+        tela.fill(PRETO)'''
 
-
+        
+       
+        
                     
         #objetos
         cobra =pygame.draw.rect(tela, (255, 0, 0), (x, y, 20, 20))
@@ -192,7 +194,15 @@ def cobrinha1(tela, relogio):
         #reiniciando depois de morto
                     if event.type == KEYDOWN:
                         if event.key == K_r:
-                            reiniciar()
+                            pontos = 0
+                            comprimento = 25
+                            x = int(Largura/2)
+                            y = int(altura/2)
+                            lista_cobra=[]
+                            lista_cabeca=[]
+                            x1 = randint(10, Largura-10)
+                            y1 = randint(10, altura-10)
+                            morreu = False
                     
                     
 
@@ -209,6 +219,12 @@ def cobrinha1(tela, relogio):
         cria_corpo(lista_cobra)
 
         pygame.draw.rect(tela, (0, 0, 255), (x1, y1, 20, 20))
+
+        txt2=f'pontos: {pontos}'                                                               
+        fonte2=pygame.font.get_default_font()              
+        fontesys2=pygame.font.SysFont(fonte2, 20)           
+        txttela2 = fontesys2.render(txt2, 1, (255,255,255))
+        tela.blit(txttela2,(10, 475))
 
 
         relogio.tick(100)
