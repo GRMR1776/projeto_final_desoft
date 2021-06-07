@@ -94,3 +94,76 @@ class Dino(pygame.sprite.Sprite):
             self.index_lista = 0
         self.index_lista += 0.25
         self.image = self.imagens_dinossauro[int(self.index_lista)]
+class Nuvens(pygame.sprite.Sprite):
+    def _init_(self):
+        pygame.sprite.Sprite._init_(self)
+        self.image = sprite_sheet.subsurface((7*32, 0), (32,32))
+        self.image = pygame.transform.scale(self.image, (32*3, 32*3))
+        self.rect = self.image.get_rect()
+        self.rect.y = randrange(50, 200, 50)
+        self.rect.x = LARGURA - randrange(30, 300, 90)
+
+    def update(self):
+        if self.rect.topright[0] < 0:
+            self.rect.x = LARGURA
+            self.rect.y = randrange(50, 200, 50)
+        self.rect.x -= velocidade_jogo
+
+class Chao(pygame.sprite.Sprite):
+    def _init_(self, pos_x):
+        pygame.sprite.Sprite._init_(self)
+        self.image = sprite_sheet.subsurface((6*32, 0), (32,32))
+        self.image = pygame.transform.scale(self.image, (32*2, 32*2))
+        self.rect = self.image.get_rect()
+        self.rect.y = ALTURA - 64
+        self.rect.x = pos_x * 64
+
+    def update(self):
+        if self.rect.topright[0] < 0:
+            self.rect.x = LARGURA
+        self.rect.x -= 10
+    
+class Cacto(pygame.sprite.Sprite):
+    def _init_(self):
+        pygame.sprite.Sprite._init_(self)
+        self.image = sprite_sheet.subsurface((5*32, 0), (32,32))
+        self.image = pygame.transform.scale(self.image, (32*2, 32*2))
+        self.rect = self.image.get_rect()
+        self.mask = pygame.mask.from_surface(self.image)
+        self.escolha = escolha_obstaculo
+        self.rect.center = (LARGURA,  ALTURA - 64)
+        self.rect.x = LARGURA
+
+    def update(self):
+        if self.escolha == 0:
+            if self.rect.topright[0] < 0:
+                self.rect.x = LARGURA
+            self.rect.x -= velocidade_jogo
+
+class DinoVoador(pygame.sprite.Sprite):
+    def _init_(self):
+        pygame.sprite.Sprite._init_(self)
+        self.imagens_dinossauro = []
+        for i in range(3,5):
+            img = sprite_sheet.subsurface((i*32, 0), (32,32))
+            img = pygame.transform.scale(img, (32*3, 32*3))
+            self.imagens_dinossauro.append(img)
+
+        self.index_lista = 0
+        self.image = self.imagens_dinossauro[self.index_lista]
+        self.mask = pygame.mask.from_surface(self.image)
+        self.escolha = escolha_obstaculo
+        self.rect = self.image.get_rect()
+        self.rect.center = (LARGURA, 300)
+        self.rect.x = LARGURA
+    
+    def update(self):
+        if self.escolha == 1:
+            if self.rect.topright[0] < 0:
+                self.rect.x = LARGURA
+            self.rect.x -= velocidade_jogo
+
+            if self.index_lista > 1:
+                self.index_lista = 0
+            self.index_lista += 0.25
+            self.image = self.imagens_dinossauro[int(self.index_lista)]
