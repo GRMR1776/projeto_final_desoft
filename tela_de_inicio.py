@@ -38,12 +38,19 @@ while game:
 
     
   
-    txt='jogo da cobrinha'                                 
+    txt='Jogo da cobrinha'                                 
     pygame.font.init()                                
     fonte=pygame.font.get_default_font()              
     fontesys=pygame.font.SysFont(fonte, 50)           
     txttela = fontesys.render(txt, 1, (255,255,255))
     tela.blit(txttela,(70, (altura/2)-80)) 
+
+    txt='Jogo de pular'                                 
+    pygame.font.init()                                
+    fonte=pygame.font.get_default_font()              
+    fontesys=pygame.font.SysFont(fonte, 50)           
+    txttela = fontesys.render(txt, 1, (255,255,255))
+    tela.blit(txttela,(700, (altura/2)-80)) 
 
     pygame.draw.circle(tela, (0, 255, 0), botao1, 20)
     pygame.draw.circle(tela, (0, 255, 0), botao2, 20)
