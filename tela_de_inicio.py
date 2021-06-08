@@ -38,14 +38,14 @@ while game:
 
     
   
-    txt='Jogo da cobrinha'                                 
+    txt='Snake Game'                                 
     pygame.font.init()                                
     fonte=pygame.font.get_default_font()              
     fontesys=pygame.font.SysFont(fonte, 50)           
     txttela = fontesys.render(txt, 1, (255,255,255))
     tela.blit(txttela,(70, (altura/2)-80)) 
 
-    txt='Jogo de pular'                                 
+    txt='Jump Game'                                 
     pygame.font.init()                                
     fonte=pygame.font.get_default_font()              
     fontesys=pygame.font.SysFont(fonte, 50)           
