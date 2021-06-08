@@ -76,7 +76,7 @@ def cobrinha1(tela, relogio):
 
     #funcao cria corpo
     lista_cobra = []
-    comprimento = 1000
+    comprimento = 25
 
 
     #relogio
