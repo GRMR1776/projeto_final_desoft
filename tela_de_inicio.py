@@ -1,3 +1,5 @@
+#Rode esse código, para os dois jogos funcionarem
+
 import pygame
 from pygame import *
 from jogo_cobrinha import *
